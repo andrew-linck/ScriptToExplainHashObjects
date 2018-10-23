@@ -1,3 +1,45 @@
+BEGIN {
+	playerData = File.open("playerData.rb", "w")
+	# One
+	print "Enter player name one:"
+	summonerNameOne = gets.chomp #chomp to remove newline
+	print "Enter preferred role one:"
+	preferredRoleOne = gets.chomp
+	# Two
+	print "Enter player name two:"
+	summonerNameTwo = gets.chomp #chomp to remove newline
+	print "Enter preferred role two:"
+	preferredRoleTwo = gets.chomp
+	# Three
+	print "Enter player name three:"
+	summonerNameThree = gets.chomp #chomp to remove newline
+	print "Enter preferred role three:"
+	preferredRoleThree = gets.chomp
+	# Four
+	print "Enter player name four:"
+	summonerNameFour = gets.chomp #chomp to remove newline
+	print "Enter preferred role four:"
+	preferredRoleFour = gets.chomp
+	# Five
+	print "Enter player name five:"
+	summonerNameFive = gets.chomp #chomp to remove newline
+	print "Enter preferred role five:"
+	preferredRoleFive = gets.chomp
+
+	playerData.write({
+	"#{summonerNameOne}" => "#{preferredRoleOne}",
+	"#{summonerNameTwo}" => "#{preferredRoleTwo}",
+	"#{summonerNameThree}" => "#{preferredRoleThree}",
+	"#{summonerNameFour}" => "#{preferredRoleFour}",
+	"#{summonerNameFive}" => "#{preferredRoleFive}",
+	})
+	playerData.close
+	playerData = File.open("playerData.rb", "r") # Must have the file open in r to read
+	contents = playerData.read
+	puts "\n print contents of playerData.rb"
+	print contents
+	playerData.close
+}
 # Team Data
 $team = Hash.new(5)
 
@@ -11,11 +53,11 @@ $team = {
 
 # Player Data
 $playerMostRecentGames = {
-	"Doublelift" => ["top","jg","top"],
-	"Blis" => ["jg","jg","top"],
-	"Parakeeni" => ["mid","mid","top"],
-	"Maxed" => ["adc","adc","supp"],
-	"Illusion" => ["supp","supp","top"]
+	"#{summonerNameOne}" => ["top","jg","top"],
+	"#{summonerNameTwo}" => ["jg","jg","top"],
+	"#{summonerNameThree}" => ["mid","mid","top"],
+	"#{summonerNameFour}" => ["adc","adc","supp"],
+	"#{summonerNameFive}" => ["supp","supp","top"]
 }
 
 $playerPreferredRole = {
@@ -75,19 +117,20 @@ class Player
 	extend TeamPlacer
 end
 
-Player.giveRole("Parakeeni", "mid")
-Player.placeOnTeam("Parakeeni")
+Player.giveRole(summonerNameOne, preferredRoleOne)
+Player.placeOnTeam(summonerNameOne)
 
-Player.giveRole("Blis", "jg")
-Player.placeOnTeam("Blis")
+Player.giveRole(summonerNameTwo, preferredRoleTwo)
+Player.placeOnTeam(summonerNameTwo)
 
-Player.giveRole("Doublelift", "")
-Player.placeOnTeam("Doublelift")
+Player.giveRole(summonerNameThree, preferredRoleThree)
+Player.placeOnTeam(summonerNameThree)
 
-Player.giveRole("Illusion", "")
-Player.placeOnTeam("Illusion")
+Player.giveRole(summonerNameFour, preferredRoleFour)
+Player.placeOnTeam(summonerNameFour)
 
-Player.giveRole("Maxed", "adc")
-Player.placeOnTeam("Maxed")
+Player.giveRole(summonerNameFive, preferredRoleFive)
+Player.placeOnTeam(summonerNameFive)
 
+puts " \n puts $team"
 puts $team
